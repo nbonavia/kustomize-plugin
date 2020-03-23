@@ -2,16 +2,48 @@
 # Skip the config file name argument.
 
 declare csv=$2
+OLDIFS=$IFS
+IFS=","
 
-echo "
-kind: ConfigMap
+function trim() {
+  echo "$1" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'
+}
+
+function getlabels() {
+  local all_labels=$1
+  if [[ -z "${all_labels// }" ]]; then
+    return
+  fi
+
+  echo "
+  labels:"
+  
+  IFS=';' read -a keyvalue <<< "$all_labels"
+  IFS=","
+  for keyvalue in "${keyvalue[@]}"
+  do
+    IFS='='
+    while read key value; do
+      echo "    ${key}: ${value}"
+    done <<< "${keyvalue}"
+    IFS=','
+  done
+}
+
+while read rawname rawtarget rawlabels
+  do
+    name=$(trim $rawname)
+    target=$(trim $rawtarget)
+    labels=$(trim $rawlabels)
+
+    echo "
 apiVersion: v1
-metadata:
-  name: my-little-dns
-data:
-  name: "$0"
-  elementname: "$1"
-  csventry: "$csv"
-  content: |-
-    "`cat $csv`"
+kind: Service
+metadata:"$(getlabels ${labels})"
+  name: "${name}"
+spec:
+  type: ExternalName
+  externalName: "${target}"
 "
+  done <$csv
+IFS=$OLDIFS
