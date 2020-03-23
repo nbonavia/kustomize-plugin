@@ -10,5 +10,4 @@ data:
   allargs: "$0"
   altGreeting: "$1"
   notwo: "$2"
-  nothree: "$3"
 "
