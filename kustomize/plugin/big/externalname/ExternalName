@@ -5,7 +5,7 @@ echo "
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: the-map
+  name: my-little-dns
 data:
   allargs: "$0"
   altGreeting: "$1"
