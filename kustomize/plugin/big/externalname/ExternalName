@@ -9,5 +9,6 @@ metadata:
 data:
   allargs: "$0"
   altGreeting: "$1"
-  no2: "$2"
+  notwo: "$2"
+  nothree: "$3"
 "
