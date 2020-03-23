@@ -9,6 +9,4 @@ metadata:
 data:
   allargs: "$0"
   altGreeting: "$1"
-  content: |-
-    `cat $1`
 "
