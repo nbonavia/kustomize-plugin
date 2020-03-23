@@ -1,0 +1,14 @@
+#!/bin/bash
+# Skip the config file name argument.
+
+echo "
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: the-map
+data:
+  allargs: "$0"
+  altGreeting: "$1"
+  content: |-
+    `cat $1`
+"
