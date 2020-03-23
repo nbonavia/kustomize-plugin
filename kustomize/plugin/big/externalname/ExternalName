@@ -1,13 +1,17 @@
 #!/bin/bash
 # Skip the config file name argument.
 
+declare csv=$2
+
 echo "
 kind: ConfigMap
 apiVersion: v1
 metadata:
   name: my-little-dns
 data:
-  allargs: "$0"
-  altGreeting: "$1"
-  notwo: "$2"
+  name: "$0"
+  elementname: "$1"
+  csventry: "$csv"
+  content: |-
+    "`cat $csv`"
 "
