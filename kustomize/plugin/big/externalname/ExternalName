@@ -9,4 +9,5 @@ metadata:
 data:
   allargs: "$0"
   altGreeting: "$1"
+  no2: "$2"
 "
