@@ -44,6 +44,7 @@ metadata:"$(getlabels ${labels})"
 spec:
   type: ExternalName
   externalName: "${target}"
+---
 "
   done <$csv
 IFS=$OLDIFS
